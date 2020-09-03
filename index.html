@@ -1,25 +1,156 @@
 <html lang = "en"> 
    <head> 
-      <meta charset = "utf-8" /> 
+    <meta charset="utf-8">
+    <meta name="description" content="WebRTC code samples">
+    <meta name="viewport" content="width=device-width, user-scalable=yes, initial-scale=1, maximum-scale=1">
+    <meta itemprop="description" content="Client-side WebRTC code samples">
+    <meta itemprop="image" content="../../../images/webrtc-icon-192x192.png">
+    <meta itemprop="name" content="WebRTC code samples">
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta id="theme-color" name="theme-color" content="#ffffff">
+
+    <base target="_blank">
+
+    <title>Transmit text</title>
+
+    <link rel="icon" sizes="192x192" href="../../../images/webrtc-icon-192x192.png">
+    <link href="//fonts.googleapis.com/css?family=Roboto:300,400,500,700" rel="stylesheet" type="text/css">
+    <!--
+    <link rel="stylesheet" href="../../../css/main.css">
+    <link rel="stylesheet" href="css/main.css"/>
+    --> 
    </head>
 	
-   <body> 
-      <div> 
-         <input type = "text" id = "loginInput" /> 
-         <button id = "loginBtn">Login</button> 
+   <body > 
+     
+      <p>Webrtc Datachannel using stun </p>
+ 
+      <div id="button1">
+         <input type = "text" id="loginInput"/> 
+         <button id = "loginBtn">Chat Name</button> 
       </div> 
-		
-      <div> 
-         <input type = "text" id = "otherUsernameInput" /> 
-         <button id = "connectToOtherUsernameBtn">Establish connection</button> 
-      </div> 
-		
-      <div> 
-         <input type = "text" id = "msgInput" /> 
+
+      <div id="button2">
+         <input type = "text" id="otherUsernameInput" /> 
+         <button id = "connectToOtherUsernameBtn">Connect to Associate</button> 
+      </div> 		
+ 
+      <div id="button3">
+         <input type = "text" id="msgInput" /> 
          <button id = "sendMsgBtn">Send text message</button> 
-      </div> 
-		
+      </div> 	 
+    
+      <!--
+      <textarea id="messages" rows="20" cols="50">
+Connected to George
+      </textarea>  	
+      -->
+      <div>
+         <!-- <button id="add-btn" class="add-btn">Add text</button> -->
+         <button id="clear-btn" class="clear-btn">Clear</button>
+      </div>
+
+      <textarea id="output" class="output"></textarea>	
+
       <script src = "/js/client.js"></script>
    </body>
 	
 </html>
+
+<style>
+body {
+  background-color: Khaki;
+}
+
+h1 {
+  color: maroon;
+  margin-left: 40px;
+}
+
+p {
+  font-family: verdana;
+  font-size: 20px;
+}
+
+textarea#messages {
+  resize: none;
+  background-color: Khaki;
+  margin-bottom: 10px;
+  border-radius: 10px;
+}
+
+input#loginInput {
+   color:black;
+   width: 200px;
+   height:40px;
+   font-size:15px;
+   margin-bottom: 10px;
+   border-radius: 10px;
+}
+input#otherUsernameInput{
+   color:black;
+   width: 200px;
+   height:40px;
+   font-size:15px;
+   margin-bottom: 10px;
+   border-radius: 10px;
+}
+input#msgInput {
+   color:black;
+   width: 400px;
+   height: 50px;
+   font-size:15px;
+   border-radius: 10px;
+   margin-bottom: 10px;
+}
+button#loginBtn {
+   width: 200px;
+   height:40px;
+   font-size:15px;
+   font-family: verdana;
+   border-radius: 10px;
+}
+button#connectToOtherUsernameBtn {
+   width: 200px;
+   height:40px;
+   font-size:15px;
+   font-family: verdana;
+   border-radius: 10px; 
+   margin-bottom: 10px;
+}
+button#sendMsgBtn {
+   width: 200px;
+   height:40px;
+   font-size:15px;
+   font-family: verdana;
+   border-radius: 10px;
+   margin-bottom: 10px;
+}
+
+body {
+  padding: 1rem;
+  background-color: lightgrey;
+}
+.add-btn, .clear-btn {
+  //font-size: 1.5rem;
+  font-family: verdana;
+  font-size: 15px;
+  width: 100px;
+  margin-bottom: 1rem;
+  border-radius: 10px;
+}
+textarea#output {
+  width: 40rem;
+  min-height: 20rem;
+  display: block;
+  //font-size: 2rem;
+  //font-family: Consolas,monaco,monospace; 
+  font-size: 15px;
+  font-family: verdana; 
+  border-radius: 10px;
+  background-color: Khaki;
+}
+</style>
+
+
+

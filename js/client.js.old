@@ -1,3 +1,16 @@
+//var connection = new WebSocket('ws://localhost:9090'); 
+//const client = new ws('ws://localhost:3000');
+//client.on('open', () => {
+  // Causes the server to print "Hello"
+  //client.send('Hello');
+//});
+
+//var connection = io('ws://localhost:9090', {transports: ['websocket']});
+//var connection = new WebSocket('ws://localhost:9090'); 
+
+//const ws = require('ws');
+//var connection = new ws('ws://localhost:3030'); 
+
 var connection = new WebSocket('ws://localhost:9090'); 
 
 var name = "";
@@ -9,7 +22,7 @@ var otherUsernameInput = document.querySelector('#otherUsernameInput');
 var connectToOtherUsernameBtn = document.querySelector('#connectToOtherUsernameBtn'); 
 var msgInput = document.querySelector('#msgInput'); 
 var sendMsgBtn = document.querySelector('#sendMsgBtn'); 
-//var addtextBtn = document.querySelector('#add-btn'); 
+var addtextBtn = document.querySelector('#add-btn'); 
 var clearBtn = document.querySelector('#clear-btn');
 var outputBtn = document.querySelector('#output');
 
@@ -17,7 +30,7 @@ var connectedUser, myConnection, dataChannel;
   
 //when a user clicks the login button 
 loginBtn.addEventListener("click", function(event) { 
-   //alert("hi");
+   alert("hi");
    name = loginInput.value; 
    //addToOutput("testing " + name);
 	
@@ -35,12 +48,11 @@ function addToOutput(val) {
 };
 
 //when a user clicks the add button ----------------------------------------------------------------
-/*
 addtextBtn.addEventListener("click", function(event) { 
-   //alert("hi-add");
+   alert("hi-add");
    addToOutput("testing");
 }); 
-*/
+
 
 
 //when a user clicks the clear button  -------------------------------------------------------------
@@ -51,18 +63,10 @@ clearBtn.addEventListener("click", function(event) {
 //handle messages from the server 
 connection.onmessage = function (message) { 
    console.log("Got message", message.data); 
-   //addToOutput("Got message", message.data);    
 
-   //alert("onmessage1 " + message.data);
-   
-   var data = JSON.parse(message.data);
-   //alert("onmessage2 " + data + " " + data.type + " " + data.toString());
+   //var data = JSON.parse(message.data); 
 
-   //var data = JSON.parse(message.data);
-   //alert("onmessage3 " + data.type + " " + data.type);
-
-   //var data2 = JSON.parse(JSON.stringify(message.data));
-   //alert("onmessage4 " + data2.type + " " + data2);
+   var data = JSON.parse(JSON.stringify(message.data));
 	
    switch(data.type) { 
       case "login": 
@@ -77,9 +81,6 @@ connection.onmessage = function (message) {
       case "candidate": 
          onCandidate(data.candidate); 
          break; 
-      case "undefined": 
-         console.log("login empty");
-         break; 
       default: 
          break; 
    } 
@@ -87,7 +88,6 @@ connection.onmessage = function (message) {
  
 //when a user logs in 
 function onLogin(success) { 
-   //alert("in onLogin");
 
    if (success === false) { 
       alert("oops...try a different username"); 
@@ -102,7 +102,7 @@ function onLogin(success) {
       }); 
 		
       console.log("RTCPeerConnection object was created"); 
-      addToOutput("RTCPeerConnection object was created");
+      //addToOutput("RTCPeerConnection object was created");
       console.log(myConnection); 
       //addToOutput(myConnection);
   
@@ -141,7 +141,6 @@ function send(message) {
    connection.send(JSON.stringify(message)); 
 };
 
-
 //setup a peer connection with another user 
 connectToOtherUsernameBtn.addEventListener("click", function () {
   
@@ -150,10 +149,11 @@ connectToOtherUsernameBtn.addEventListener("click", function () {
 	
    if (otherUsername.length > 0) { 
       //make an offer 
-      myConnection.createOffer(function (offer) { 
-         console.log(); 
-			
-         send({ 
+      //console.log(); 
+      alert("make offer " + connectedUser);
+     /*
+      myConnection.createOffer(function (offer) {        
+	 send({ 
             type: "offer", 
             offer: offer 
          }); 
@@ -162,9 +162,9 @@ connectToOtherUsernameBtn.addEventListener("click", function () {
       }, function (error) { 
          alert("An error has occurred."); 
       }); 
+     */
    } 
 });
-
   
 //when somebody wants to call us 
 function onOffer(offer, name) { 
@@ -209,24 +209,46 @@ function openDataChannel() {
    };
 	
    dataChannel.onmessage = function (event) { 
-      console.log("Received message:", event.data);  
-
-      //var data = JSON.parse(event.data);
-      //const stuff = event.data.toString();
-      //alert(event.data);
-      //alert(stuff);
-      //alert("received  " + data + " " + data.type + " " + data.toString());
-
-      addToOutput("Got message: " + event.data); 
-      //addToOutput(myConnection);      
+      console.log("Got message:", event.data);        
    };  
 }
-
+  
 //when a user clicks the send message button 
 sendMsgBtn.addEventListener("click", function (event) { 
-   console.log("send message");
-   var val = msgInput.value; 
-   addToOutput("send message " + val);
+   var val = msgInput.value;   
+   console.log("send message " + val);
+   //addToOutput("send message " + val);
    dataChannel.send(val); 
+   //dataChannel.send("wassup"); 
 });
 
+/* ---------------------------------------------------------------------------------------------
+var counter = 0;
+$('#add-btn').click(function() {
+  alert("hey");
+  addToTextarea($('#output'), counter);
+  counter++;
+});
+$('#clear-btn').click(function() {
+  alert("hey2"); 
+  $('#output').val('');
+  counter = 0;
+});
+
+function addToTextarea($ta, text) {
+  var val = $ta.val();
+  if (val) {
+    $ta.val(val + '\n' + text);
+  } else {
+    $ta.val(text);
+  }
+  $ta.scrollTop($ta[0].scrollHeight);
+}
+
+const selectElement = document.querySelector('.ice-cream');
+
+selectElement.addEventListener('change', (event) => {
+  const result = document.querySelector('.result');
+  result.textContent = `You like ${event.target.value}`;
+});
+*/

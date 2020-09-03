@@ -5,20 +5,39 @@
  *  that can be found in the LICENSE file in the root of the source
  *  tree.
  */
+
+body {
+  background-color: #FF7F50;
+}
+
+h1 {
+  color: white;
+  text-align: center;
+}
+
+p {
+  font-family: verdana;
+  font-size: 20px;
+}
+
 button {
   margin: 0 1em 1em 0;
-  width: 90px;
+  width: 120px; 
 }
 div#buttons {
-  margin: 0 0 1em 0;
+  margin: 0 0 1em 0; 
 }
 div#send {
   margin: 0 20px 1em 0;
+  font-family: verdana;
+  font-size: 20px;
 }
 div#sendReceive {
   border-bottom: 1px solid #eee;
   margin: 0;
   padding: 0 0 10px 0;
+  font-family: verdana;
+  font-size: 20px;
 }
 div#sendReceive > div {
   display: inline-block;
